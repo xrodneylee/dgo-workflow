@@ -7,6 +7,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.google.common.base.Preconditions;
+
 public class LinodeCreateVm {
 	private final String ROOT_URL = "https://api.linode.com/";
 	private final String ACTION = "linode.create";
@@ -44,6 +46,9 @@ public class LinodeCreateVm {
 		private String apiKey;
 		
 		public LinodeCreateVm build() {
+			Preconditions.checkNotNull(dataCenterId, "dataCenterId can't be null");
+			Preconditions.checkNotNull(planId, "planId can't be null");
+			Preconditions.checkNotNull(apiKey, "apiKey can't be null");
 			return new LinodeCreateVm(this);
 		}
 		

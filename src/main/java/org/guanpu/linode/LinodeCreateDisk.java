@@ -7,6 +7,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.google.common.base.Preconditions;
+
 public class LinodeCreateDisk {
 	private final String ROOT_URL = "https://api.linode.com/";
 	private final String ACTION = "linode.disk.create";
@@ -52,6 +54,11 @@ public class LinodeCreateDisk {
 		private String apiKey;
 		
 		public LinodeCreateDisk build(){
+			Preconditions.checkNotNull(linodeId, "linodeId can't be null");
+			Preconditions.checkNotNull(label, "label can't be null");
+			Preconditions.checkNotNull(apiKey, "apiKey can't be null");
+			Preconditions.checkNotNull(type, "type can't be null");
+			Preconditions.checkNotNull(size, "size can't be null");
 			return new LinodeCreateDisk(this);
 		}
 		
