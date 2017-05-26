@@ -54,7 +54,7 @@ public class LinodeAvailDatacentersTest {
 	
 	@Test
 	public void testDatacenterCount() {
-		assertEquals(LINODE_DATACENTER_AMOUNT, root.at("/DATA").size());
+		assertEquals(LINODE_DATACENTER_AMOUNT, root.path("DATA").size());
 	}
 
 }
