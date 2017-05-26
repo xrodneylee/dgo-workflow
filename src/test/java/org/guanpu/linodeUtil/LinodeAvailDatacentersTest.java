@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LinodeAvailDatacentersTest {
 
+	private static final int LINODE_DATACENTER_AMOUNT = 9;
 	LinodeCredential credential;
 	LinodeAvailDatacenters datacenter;
 	Response credentialResponse;
@@ -52,8 +53,8 @@ public class LinodeAvailDatacentersTest {
 	}
 	
 	@Test
-	public void testDatacenter() {
-		System.out.println(root.toString());
+	public void testDatacenterCount() {
+		assertEquals(LINODE_DATACENTER_AMOUNT, root.at("/DATA").size());
 	}
 
 }
