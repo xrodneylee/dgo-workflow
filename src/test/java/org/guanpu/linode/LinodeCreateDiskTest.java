@@ -12,50 +12,52 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class LinodeCreateVmTest {
+public class LinodeCreateDiskTest {
 
 	LinodeCredential credential;
-	LinodeCreateVm vm;
+	LinodeCreateDisk disk;
 	Response credentialResponse;
-	Response vmResponse;
+	Response diskResponse;
 	String apiKey;
 	JsonNode root;
 	
 	@Before
 	public void setUp() throws Exception {
 		credential = new LinodeCredential.Builder()
-							.setUsername("username")
-							.setPassword("password")
-							.build();
-		
+			.setUsername("username")
+			.setPassword("password")
+			.build();
+
 		credentialResponse = credential.invoke();
 		apiKey = new ObjectMapper().readTree(credentialResponse.readEntity(String.class)).at("/DATA/API_KEY").asText();
 		
-		vm = new LinodeCreateVm.Builder()
-					.setApiKey(apiKey)
-					.setDataCenterId(0)
-					.setPlanId(0)
-					.setPaymentTerm(0)
-					.build();
+		disk = new LinodeCreateDisk.Builder()
+			.setApiKey(apiKey)
+			.setLinodeId(0)
+			.setLabel("label")
+			.setType("type")
+			.setReadOnly(false)
+			.setSize(0)
+			.build();
 		
-		vmResponse = vm.invoke();
-		root = new ObjectMapper().readTree(vmResponse.readEntity(String.class));
+		diskResponse = disk.invoke();
+		root = new ObjectMapper().readTree(diskResponse.readEntity(String.class));
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		credentialResponse.close();
-		vmResponse.close();
+		diskResponse.close();
 	}
 
 	@Test
 	public void testStatus() {
-		assertEquals(200, vmResponse.getStatus());
+		assertEquals(200, diskResponse.getStatus());
 	}
 	
 	@Test
-	public void testLinodeId() {
-		assertNotEquals("", root.at("/DATA/LinodeID").asText());
+	public void testDiskId() {
+		assertNotEquals("", root.at("/DATA/DiskID").asText());
 	}
 
 }

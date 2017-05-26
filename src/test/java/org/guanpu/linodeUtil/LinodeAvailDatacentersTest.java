@@ -1,10 +1,11 @@
-package org.guanpu.linode;
+package org.guanpu.linodeUtil;
 
 import static org.junit.Assert.*;
 
 import javax.ws.rs.core.Response;
 
 import org.guanpu.core.LinodeCredential;
+import org.guanpu.linode.LinodeCreateVm;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,50 +13,48 @@ import org.junit.Test;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class LinodeCreateVmTest {
+public class LinodeAvailDatacentersTest {
 
+	private static final int LINODE_DATACENTER_AMOUNT = 9;
 	LinodeCredential credential;
-	LinodeCreateVm vm;
+	LinodeAvailDatacenters datacenter;
 	Response credentialResponse;
-	Response vmResponse;
+	Response datacenterResponse;
 	String apiKey;
 	JsonNode root;
 	
 	@Before
 	public void setUp() throws Exception {
 		credential = new LinodeCredential.Builder()
-							.setUsername("username")
-							.setPassword("password")
-							.build();
-		
+		.setUsername("username")
+		.setPassword("password")
+		.build();
+
 		credentialResponse = credential.invoke();
 		apiKey = new ObjectMapper().readTree(credentialResponse.readEntity(String.class)).at("/DATA/API_KEY").asText();
 		
-		vm = new LinodeCreateVm.Builder()
-					.setApiKey(apiKey)
-					.setDataCenterId(0)
-					.setPlanId(0)
-					.setPaymentTerm(0)
-					.build();
+		datacenter = new LinodeAvailDatacenters.Builder()
+			.setApiKey(apiKey)
+			.build();
 		
-		vmResponse = vm.invoke();
-		root = new ObjectMapper().readTree(vmResponse.readEntity(String.class));
+		datacenterResponse = datacenter.invoke();
+		root = new ObjectMapper().readTree(datacenterResponse.readEntity(String.class));
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		credentialResponse.close();
-		vmResponse.close();
+		datacenterResponse.close();
 	}
 
 	@Test
 	public void testStatus() {
-		assertEquals(200, vmResponse.getStatus());
+		assertEquals(200, datacenterResponse.getStatus());
 	}
 	
 	@Test
-	public void testLinodeId() {
-		assertNotEquals("", root.at("/DATA/LinodeID").asText());
+	public void testDatacenterCount() {
+		assertEquals(LINODE_DATACENTER_AMOUNT, root.at("/DATA").size());
 	}
 
 }
