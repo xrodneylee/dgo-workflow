@@ -12,7 +12,7 @@ import com.google.common.base.Preconditions;
 public class LinodeCreateDisk {
 	private final String ROOT_URL = "https://api.linode.com/";
 	private final String ACTION = "linode.disk.create";
-	private final String linodeId;
+	private final int linodeId;
 	private final String label;
 	private final String type;
 	private final boolean isReadOnly;
@@ -46,7 +46,7 @@ public class LinodeCreateDisk {
 	}
 	
 	public static final class Builder {
-		private String linodeId;
+		private int linodeId;
 		private String label;
 		private String type;
 		private boolean isReadOnly;
@@ -62,7 +62,7 @@ public class LinodeCreateDisk {
 			return new LinodeCreateDisk(this);
 		}
 		
-		public Builder setLinodeId(String linodeId) {
+		public Builder setLinodeId(int linodeId) {
 			this.linodeId = linodeId;
 			return this;
 		}

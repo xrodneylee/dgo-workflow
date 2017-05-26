@@ -33,7 +33,7 @@ public class LinodeCreateDiskTest {
 		
 		disk = new LinodeCreateDisk.Builder()
 			.setApiKey(apiKey)
-			.setLinodeId("linodeId")
+			.setLinodeId(0)
 			.setLabel("label")
 			.setType("type")
 			.setReadOnly(false)

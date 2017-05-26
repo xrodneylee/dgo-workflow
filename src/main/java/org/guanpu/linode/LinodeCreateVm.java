@@ -12,9 +12,9 @@ import com.google.common.base.Preconditions;
 public class LinodeCreateVm {
 	private final String ROOT_URL = "https://api.linode.com/";
 	private final String ACTION = "linode.create";
-	private final String dataCenterId;
-	private final String planId;
-	private final String paymentTerm;
+	private final int dataCenterId;
+	private final int planId;
+	private final int paymentTerm;
 	private final String apiKey;
 	
 	private LinodeCreateVm(Builder builder) {
@@ -40,9 +40,9 @@ public class LinodeCreateVm {
 	}
 	
 	public static final class Builder {
-		private String dataCenterId;
-		private String planId;
-		private String paymentTerm;
+		private int dataCenterId;
+		private int planId;
+		private int paymentTerm;
 		private String apiKey;
 		
 		public LinodeCreateVm build() {
@@ -52,17 +52,17 @@ public class LinodeCreateVm {
 			return new LinodeCreateVm(this);
 		}
 		
-		public Builder setDataCenterId(String dataCenterId) {
+		public Builder setDataCenterId(int dataCenterId) {
 			this.dataCenterId = dataCenterId;
 			return this;
 		}
 		
-		public Builder setPlanId(String planId) {
+		public Builder setPlanId(int planId) {
 			this.planId = planId;
 			return this;
 		}
 		
-		public Builder setPaymentTerm(String paymentTerm) {
+		public Builder setPaymentTerm(int paymentTerm) {
 			this.paymentTerm = paymentTerm;
 			return this;
 		}
