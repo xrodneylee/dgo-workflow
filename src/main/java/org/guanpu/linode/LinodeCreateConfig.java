@@ -20,7 +20,7 @@ public class LinodeCreateConfig {
 	private final String label;
 	private final String comments;
 	private final int ramLimit;
-	private final List<String> diskList;
+	private final List<Integer> diskList;
 	private final String virtMode;
 	private final String runLevel;
 	private final int rootDeviceNum;
@@ -81,7 +81,7 @@ public class LinodeCreateConfig {
 		private String label;
 		private String comments;
 		private int ramLimit;
-		private List<String> diskList;
+		private List<Integer> diskList;
 		private String virtMode;
 		private String runLevel;
 		private int rootDeviceNum;
@@ -133,7 +133,7 @@ public class LinodeCreateConfig {
 			return this;
 		}
 		
-		public Builder setDiskList(List<String> diskList) {
+		public Builder setDiskList(List<Integer> diskList) {
 			this.diskList = diskList;
 			return this;
 		}

@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import javax.ws.rs.core.Response;
 
 import org.guanpu.core.LinodeCredential;
-import org.guanpu.linode.LinodeCreateVm;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
