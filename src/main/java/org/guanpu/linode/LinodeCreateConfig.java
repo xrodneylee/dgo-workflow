@@ -9,6 +9,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.google.common.base.Preconditions;
+
 public class LinodeCreateConfig {
 	private final String ROOT_URL = "https://api.linode.com/";
 	private final String ACTION = "linode.config.create";
@@ -93,6 +95,11 @@ public class LinodeCreateConfig {
 		private boolean devtmpfsAutomount;
 		
 		public LinodeCreateConfig build(){
+			Preconditions.checkNotNull(linodeId, "linodeId can't be null");
+			Preconditions.checkNotNull(kernelId, "kernelId can't be null");
+			Preconditions.checkNotNull(label, "label can't be null");
+			Preconditions.checkNotNull(diskList, "diskList can't be null");
+			Preconditions.checkNotNull(apiKey, "apiKey can't be null");
 			return new LinodeCreateConfig(this);
 		}
 		

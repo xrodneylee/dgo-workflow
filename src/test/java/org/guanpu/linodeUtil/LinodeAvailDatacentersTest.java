@@ -26,9 +26,9 @@ public class LinodeAvailDatacentersTest {
 	@Before
 	public void setUp() throws Exception {
 		credential = new LinodeCredential.Builder()
-		.setUsername("username")
-		.setPassword("password")
-		.build();
+			.setUsername("username")
+			.setPassword("password")
+			.build();
 
 		credentialResponse = credential.invoke();
 		apiKey = new ObjectMapper().readTree(credentialResponse.readEntity(String.class)).at("/DATA/API_KEY").asText();
