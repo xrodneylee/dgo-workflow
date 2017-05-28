@@ -7,6 +7,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.google.common.base.Preconditions;
+
 public class LinodeAvailPlans {
 	private final String ROOT_URL = "https://api.linode.com/";
 	private final String ACTION = "avail.linodeplans";
@@ -36,6 +38,7 @@ public class LinodeAvailPlans {
 		private int planId;
 
 		public LinodeAvailPlans build() {
+			Preconditions.checkNotNull(apiKey, "apiKey can't be null");
 			return new LinodeAvailPlans(this);
 		}
 		

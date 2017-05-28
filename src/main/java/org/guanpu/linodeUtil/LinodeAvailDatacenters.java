@@ -7,6 +7,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.google.common.base.Preconditions;
+
 public class LinodeAvailDatacenters {
 	private final String ROOT_URL = "https://api.linode.com/";
 	private final String ACTION = "avail.datacenters";
@@ -32,6 +34,7 @@ public class LinodeAvailDatacenters {
 		private String apiKey;
 
 		public LinodeAvailDatacenters build() {
+			Preconditions.checkNotNull(apiKey, "apiKey can't be null");
 			return new LinodeAvailDatacenters(this);
 		}
 		

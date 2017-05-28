@@ -29,6 +29,7 @@ public class Workflow {
 		createSwapDisk();
 		createDataDisk();
 		createConfig();
+		setSecurity();
 	}
 
 	private void genApiKey() throws Exception {
@@ -107,4 +108,7 @@ public class Workflow {
 		response.close();
 	}
 	
+	private void setSecurity() {
+		
+	}
 }
