@@ -9,6 +9,7 @@ import org.guanpu.core.LinodeCredential;
 import org.guanpu.linode.LinodeCreateConfig;
 import org.guanpu.linode.LinodeCreateDisk;
 import org.guanpu.linode.LinodeCreateVm;
+import org.guanpu.util.LinodePlans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,7 +47,7 @@ public class Workflow {
 		vm = new LinodeCreateVm.Builder()
 					.setApiKey(apiKey)
 					.setDataCenterId(11)
-					.setPlanId(1)
+					.setPlanId(LinodePlans.LINODE_1024.getValue())
 					.build();
 		Response response = vm.invoke();
 		linodeId = new ObjectMapper().readTree(response.readEntity(String.class)).at("/DATA/LinodeID").asInt();
